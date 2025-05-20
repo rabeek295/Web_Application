@@ -59,13 +59,13 @@ pipeline {
         stage("Push to Docker Hub") {
             steps {
                 // If your repo is private, uncomment below block and configure credentials in Jenkins
-                /*
+                
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                    sh 'echo $Rabeek@295 | docker login -u $rabeek295 --password-stdin'
                 }
-                */
+                
                 sh """
-                docker tag phonepe ${DOCKERHUB_USERNAME}/instagram
+                docker tag instagram ${DOCKERHUB_USERNAME}/instagram
                 docker push ${DOCKERHUB_USERNAME}/instagram
                 """
             }
