@@ -56,19 +56,22 @@ pipeline {
             }
         }
 
-        stage("Push to Docker Hub") {
-            steps {
-                // If your repo is private, uncomment below block and configure credentials in Jenkins
-                
-                withCredentials([usernamePassword(credentialsId: 'admin', usernameVariable: 'rabeek295', passwordVariable: 'Rabeek@3295')]) {
-                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-                }
-                
-                sh """
-                docker tag instagram ${DOCKERHUB_USERNAME}/instagram
-                docker push ${DOCKERHUB_USERNAME}/instagram
-                """
-            }
+       stage('Push to Docker Hub') {
+    steps {
+        withCredentials([usernamePassword(
+            credentialsId: 'admin',  // Use your actual Jenkins credentials ID here
+            usernameVariable: 'rabeek295',
+            passwordVariable: 'Rabeek@3295'
+        )]) {
+            sh '''
+                echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+                docker push instagram
+            '''
+        }
+        echo 'Image pushed successfully'
+    }
+}
+
             post {
                 success {
                     echo "Push to Docker Hub was successful"
