@@ -56,28 +56,26 @@ pipeline {
             }
         }
 
-        stage("Push to Docker Hub") {
-            steps {
-                // If your repo is private, uncomment below block and configure credentials in Jenkins
-                
-                withCredentials([usernamePassword(credentialsId: 'admin', DOCKER_USERNAME: 'rabeek295', DOCKER_PASS: 'Rabeek@3295')]) {
-                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USERNAME --password-stdin'
-                }
-                
-                sh """
-                docker tag instagram ${DOCKERHUB_USERNAME}/instagram
-                docker push ${DOCKERHUB_USERNAME}/instagram
-                """
-            }
-            post {
-                success {
-                    echo "Push to Docker Hub was successful"
-                }
-                failure {
-                    echo "Push to Docker Hub failed"
-                }
-            }
+       stage("Push to Docker Hub") {
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+            sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
         }
+
+        sh """
+        docker tag instagram ${DOCKERHUB_USERNAME}/instagram
+        docker push ${DOCKERHUB_USERNAME}/instagram
+        """
+    }
+    post {
+        success {
+            echo "Push to Docker Hub was successful"
+        }
+        failure {
+            echo "Push to Docker Hub failed"
+        }
+    }
+}
 
         stage("Remove Docker Image Locally") {
             steps {
