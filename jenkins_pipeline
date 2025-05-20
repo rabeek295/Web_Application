@@ -59,13 +59,11 @@ pipeline {
        stage("Push to Docker Hub") {
     steps {
         withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-            sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+            sh '''echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin 
+             docker tag instagram ${DOCKERHUB_USERNAME}/instagram
+             docker push ${DOCKERHUB_USERNAME}/instagram
+           '''
         }
-
-        sh """
-        docker tag instagram ${DOCKERHUB_USERNAME}/instagram
-        docker push ${DOCKERHUB_USERNAME}/instagram
-        """
     }
     post {
         success {
