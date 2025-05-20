@@ -61,8 +61,8 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
                         echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                        docker tag instagram $DOCKER_USER/instagram
-                        docker push $DOCKER_USER/instagram
+                        docker tag instagram $DOCKER_USER/instagram:latest
+                        docker push $DOCKER_USER/instagram:latest
                     '''
                 }
             }
