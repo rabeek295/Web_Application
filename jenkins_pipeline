@@ -61,7 +61,7 @@ pipeline {
                 // If your repo is private, uncomment below block and configure credentials in Jenkins
                 
                 withCredentials([usernamePassword(credentialsId: 'admin', DOCKER_USER: 'rabeek295', DOCKER_PASS: 'Rabeek@3295')]) {
-                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                    sh 'echo $DOCKER_USER | docker login -u $DOCKER_PASS --password-stdin'
                 }
                 
                 sh """
