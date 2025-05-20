@@ -44,7 +44,7 @@ pipeline {
 
         stage("Build Docker Image") {
             steps {
-                sh 'docker build -t phonepe .'
+                sh 'docker build -t instagram .'
             }
             post {
                 success {
@@ -65,8 +65,8 @@ pipeline {
                 }
                 */
                 sh """
-                docker tag phonepe ${DOCKERHUB_USERNAME}/phonepe
-                docker push ${DOCKERHUB_USERNAME}/phonepe
+                docker tag phonepe ${DOCKERHUB_USERNAME}/instagram
+                docker push ${DOCKERHUB_USERNAME}/instagram
                 """
             }
             post {
@@ -82,8 +82,8 @@ pipeline {
         stage("Remove Docker Image Locally") {
             steps {
                 sh """
-                docker rmi -f ${DOCKERHUB_USERNAME}/phonepe || true
-                docker rmi -f phonepe || true
+                docker rmi -f ${DOCKERHUB_USERNAME}/instagram || true
+                docker rmi -f instagram || true
                 """
             }
             post {
@@ -100,7 +100,7 @@ pipeline {
             steps {
                 sh """
                 docker rm -f app || true
-                docker run -d --name app -p 8081:8080 ${DOCKERHUB_USERNAME}/phonepe
+                docker run -d --name app -p 8081:8080 ${DOCKERHUB_USERNAME}/instagram
                 """
             }
             post {
