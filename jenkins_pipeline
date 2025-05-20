@@ -4,7 +4,7 @@ pipeline {
         maven 'maven'
     }
     environment{
-        DOCKERHUB_USERNAME = "prakru07"
+        DOCKERHUB_USERNAME = "rabeek295"
     }
     stages {
         stage("clean") {
@@ -53,47 +53,56 @@ pipeline {
                     docker push ${DOCKERHUB_USERNAME}/phonepe
                     """
                 }
-            post {
-                success {
-                    echo "deployemnt successfull"
+                post {
+                success{
+                    echo "push is get success"
                 }
-                failure {
-                    echo "deployment is failure"
-                }
-            }
-           }      
+                failure{
+                    echo "pushing is failure"
+                }
+            
+            }
+                
         }
-        stage("remove docker image locally"){
+        stage("remove docker image locally")
+        {
             steps{
                 sh"""
-                docker rmi -f ${rabeek295}/phonepe
+                docker rmi -f ${DOCKERHUB_USERNAME}/phonepe
                 docker rmi -f phonepe
                 """
             }
             post {
-                success {
-                    echo "deployemnt successfull"
+                success{
+                    echo "remove sucess"
                 }
-                failure {
-                    echo "deployment is failure"
-                }
-            }
+                failure{
+                    echo "remove is failure"
+                }
+            }
         }
         stage("stop and restart"){
             steps {
                 sh"""
                 docker rm -f app
-                docker run -it -d --name app -p 8081:8080 ${rabeek295}/phonepe
+                docker run -it -d --name app -p 8081:8080 ${DOCKERHUB_USERNAME}/phonepe
                 """
             }
+            post {
+                success{
+                    echo "i stoped"
+                }
+                failure{
+                    echo "failure to start"
+                }
+            }
         }
-    }
-        post {
-           success {
-              echo "deployemnt successfull"
+    post {
+        success {
+            echo "deployemnt successfull"
         }
-           failure {
-              echo "deployment is failure"
+        failure {
+            echo "deployment is failure"
         }
     }
 }
