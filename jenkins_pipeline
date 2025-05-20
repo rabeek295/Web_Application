@@ -56,24 +56,26 @@ pipeline {
             }
         }
 
-       stage("Push to Docker Hub") {
-    steps {
-        withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-            sh '''echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin 
-             docker tag instagram ${DOCKERHUB_USERNAME}/instagram
-             docker push ${DOCKERHUB_USERNAME}/instagram
-           '''
+              stage("Push to Docker Hub") {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh '''
+                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                        docker tag instagram $DOCKER_USER/instagram
+                        docker push $DOCKER_USER/instagram
+                    '''
+                }
+            }
+            post {
+                success {
+                    echo "Push to Docker Hub was successful"
+                }
+                failure {
+                    echo "Push to Docker Hub failed"
+                }
+            }
         }
-    }
-    post {
-        success {
-            echo "Push to Docker Hub was successful"
-        }
-        failure {
-            echo "Push to Docker Hub failed"
-        }
-    }
-}
+
 
         stage("Remove Docker Image Locally") {
             steps {
