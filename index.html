@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Men's Fashion - StyleUnion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      color: #222;
+    }
+
+    header {
+      background: #fff;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #000;
+      font-size: 16px;
+    }
+
+    nav a:hover {
+      color: #ff4d4d;
+    }
+
+    .icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .icons i {
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .product-card {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+
+    .product-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: auto;
+    }
+
+    .product-info {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .product-name {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .product-price {
+      color: #ff4d4d;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .add-to-cart {
+      padding: 8px 12px;
+      background-color: #222;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add-to-cart:hover {
+      background-color: #000;
+    }
+
+    @media (max-width: 600px) {
+      nav, .icons {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+      }
+    }
+    .wishlist-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #ff4d4d;
+  cursor: pointer;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+.wishlist-btn:hover i {
+  color: red;
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">STYLE <span style="color:#ff4d4d">UNION</span></div>
+    <nav>
+      <a href="#">Featured</a>
+      <a href="men.html">Men</a>
+      <a href="women.html">Women</a>
+      <a href="kids.html">Kids</a>
+      <a href="#">New In</a>
+      <a href="#">Returns</a>
+    </nav>
+    <div class="icons">
+      <div style="position: relative;">
+  <input type="text" placeholder="Search..." style="padding: 6px 10px; border-radius: 5px; border: 1px solid #ccc;" />
+</div>
+      <div style="position: relative;">
+  <i class="fa-solid fa-cart-shopping"></i>
+  <span id="cart-count" style="position: absolute; top: -8px; right: -8px; background-color: red; color: white; font-size: 12px; padding: 2px 6px; border-radius: 50%;">0</span>
+</div>
+
+      <i class="fa-solid fa-user"></i>
+      
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+<section style="background: url('https://images.unsplash.com/photo-1552374196-c4e7ffc6e126') center/cover no-repeat; height: 60vh; display: flex; align-items: center; justify-content: center; color: white;">
+  <h1 style="background-color: rgba(0,0,0,0.5); padding: 20px 40px; border-radius: 10px; font-size: 36px;">Men's Shirts Collection</h1>
+</section>
+
+<!-- Category Filter -->
+<div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; padding: 20px; background-color: #f9f9f9;">
+  <button style="padding: 8px 16px; border: 1px solid #ddd; background: white; cursor: pointer;">All</button>
+  <button style="padding: 8px 16px; border: 1px solid #ddd; background: white; cursor: pointer;">Casual</button>
+  <button style="padding: 8px 16px; border: 1px solid #ddd; background: white; cursor: pointer;">Formal</button>
+  <button style="padding: 8px 16px; border: 1px solid #ddd; background: white; cursor: pointer;">Printed</button>
+  <button style="padding: 8px 16px; border: 1px solid #ddd; background: white; cursor: pointer;">Linen</button>
+</div>
+
+ <div style="padding: 20px; text-align: center;">
+  <label for="price-range">Filter by Price:</label>
+  <input type="range" id="price-range" name="price-range" min="500" max="2000" value="1500" style="width: 200px;">
+  <span id="price-value">₹1500</span>
+</div>
+
+  <section class="product-grid">
+    <div class="product-card">
+      <img src="https://assets.ajio.com/medias/sys_master/root/20250512/VDbX/6821f01a55340d4b4f2e51ab/-473Wx593H-701316842-offwhite-MODEL.jpg" alt="Shirt 1">
+      <div class="product-info">
+        <div class="product-name">Linen Shirt - Band Collar</div>
+        <div class="rating">
+  <i class="fa-solid fa-star" style="color:gold;"></i>
+  <i class="fa-solid fa-star" style="color:gold;"></i>
+  <i class="fa-solid fa-star" style="color:gold;"></i>
+  <i class="fa-solid fa-star-half-stroke" style="color:gold;"></i>
+  <i class="fa-regular fa-star" style="color:gold;"></i>
+</div>
+        <div class="product-price">₹999.00</div>
+        <button class="add-to-cart">Add to Cart</button>
+        <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://assets.ajio.com/medias/sys_master/root/20240419/cYZ9/6622862616fd2c6e6ac176a7/-473Wx593H-442587207-teal-MODEL.jpg" alt="Shirt 2">
+      <div class="product-info">
+        <div class="product-name">Printed Camp Collar Shirt</div>
+        <div class="rating">
+  <i class="fa-solid fa-star" style="color:gold;"></i>
+  <i class="fa-solid fa-star" style="color:gold;"></i>
+  <i class="fa-solid fa-star" style="color:gold;"></i>
+  <i class="fa-solid fa-star-half-stroke" style="color:gold;"></i>
+  <i class="fa-regular fa-star" style="color:gold;"></i>
+</div>
+        <div class="product-price">₹799.00</div>
+        <button class="add-to-cart">Add to Cart</button>
+        <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+
+      </div>
+    </div>
+    
+
+    <div class="product-card">
+      <img src="https://assets.ajio.com/medias/sys_master/root/20240417/Sntp/661fb3c805ac7d77bb13ac1d/-473Wx593H-443041749-blue-MODEL.jpg" alt="Shirt 3">
+      <div class="product-info">
+        <div class="product-name">Floral Print Shirt</div>
+        <div class="rating">
+  <i class="fa-solid fa-star" style="color:gold;"></i>
+  <i class="fa-solid fa-star" style="color:gold;"></i>
+  <i class="fa-solid fa-star" style="color:gold;"></i>
+  <i class="fa-solid fa-star-half-stroke" style="color:gold;"></i>
+  <i class="fa-regular fa-star" style="color:gold;"></i>
+</div>
+
+        <div class="product-price">₹799.00</div>
+        <button class="add-to-cart">Add to Cart</button>
+        <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://assets.ajio.com/medias/sys_master/root/20250306/swpB/67c9d13359f83539802373dd/-473Wx593H-443068888-darkblack-MODEL.jpg" alt="Shirt 4">
+      <div class="product-info">
+        <div class="product-name">Casual Black Shirt</div>
+        <div class="rating">
+  <i class="fa-solid fa-star" style="color:gold;"></i>
+  <i class="fa-solid fa-star" style="color:gold;"></i>
+  <i class="fa-solid fa-star" style="color:gold;"></i>
+  <i class="fa-solid fa-star-half-stroke" style="color:gold;"></i>
+  <i class="fa-regular fa-star" style="color:gold;"></i>
+</div>
+        <div class="product-price">₹799.00</div>
+        <button class="add-to-cart">Add to Cart</button>
+        <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Back to Top Button -->
+<button id="backToTop" title="Go to top" style="position: fixed; bottom: 30px; right: 30px; display: none; background-color: #000; color: white; border: none; padding: 10px 14px; border-radius: 50%; cursor: pointer; font-size: 18px;">
+  ↑
+</button>
+
+<!-- Footer -->
+<footer style="background-color: #222; color: white; text-align: center; padding: 20px; margin-top: 40px;">
+  <p>© 2025 StyleUnion. All rights reserved.</p>
+  <p>
+    <a href="#" style="color: #ccc; text-decoration: none; margin: 0 10px;">Privacy Policy</a> |
+    <a href="#" style="color: #ccc; text-decoration: none; margin: 0 10px;">Terms of Use</a> |
+    <a href="#" style="color: #ccc; text-decoration: none; margin: 0 10px;">Support</a>
+  </p>
+</footer>
+<div id="cart-popup" style="position: fixed; bottom: 50px; right: 30px; background: #222; color: white; padding: 12px 20px; border-radius: 5px; display: none;">
+  Item added to cart!
+</div>
+
+<!-- Cart Modal -->
+<div id="cart-modal" style="display: none; position: fixed; top: 15%; right: 30px; width: 300px; background: #fff; border: 1px solid #ccc; box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 9999; border-radius: 8px; overflow-y: auto; max-height: 60vh;">
+  <div style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Your Cart</div>
+  <div id="cart-items" style="padding: 10px;"></div>
+</div>
+C
+
+<!-- JavaScript -->
+<script>
+  // Back to Top functionality
+//   const backToTop = document.getElementById("backToTop");
+//   window.onscroll = function () {
+//     backToTop.style.display = (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) ? "block" : "none";
+//   };
+//   backToTop.onclick = function () {
+//     window.scrollTo({ top: 0, behavior: 'smooth' });
+//   };
+  
+//   document.querySelectorAll('.add-to-cart').forEach(button => {
+//   button.addEventListener('click', () => {
+//     const popup = document.getElementById("cart-popup");
+//     popup.style.display = "block";
+//     setTimeout(() => popup.style.display = "none", 2000);
+//   });
+// });
+
+// const priceSlider = document.getElementById("price-range");
+// const priceValue = document.getElementById("price-value");
+// priceSlider.addEventListener("input", () => {
+//   priceValue.textContent = ₹${priceSlider.value};
+// });
+  
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const cartCountEl = document.getElementById("cart-count");
+  const popup = document.getElementById("cart-popup");
+  const cartModal = document.getElementById("cart-modal");
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  function updateCartUI() {
+    cartCountEl.textContent = cart.length;
+  }
+
+  function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartUI();
+  }
+
+  function renderCart() {
+    cartItemsContainer.innerHTML = '';
+
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = '<p style="text-align: center; color: #666;">Cart is empty</p>';
+      return;
+    }
+
+    cart.forEach((item, index) => {
+      const itemEl = document.createElement("div");
+      itemEl.style.display = "flex";
+      itemEl.style.alignItems = "center";
+      itemEl.style.marginBottom = "10px";
+
+      itemEl.innerHTML = `
+        <img src="${item.image}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px; margin-right: 10px;">
+        <div style="flex-grow: 1;">
+          <div style="font-size: 14px;">${item.name}</div>
+          <div style="font-size: 13px; color: #ff4d4d;">${item.price}</div>
+        </div>
+        <button onclick="removeFromCart(${index})" style="background: red; color: white; border: none; padding: 4px 8px; font-size: 12px; border-radius: 4px; cursor: pointer;">Remove</button>
+      `;
+
+      cartItemsContainer.appendChild(itemEl);
+    });
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    saveCart();
+    renderCart();
+  }
+
+  // Add to cart
+  document.querySelectorAll('.product-card').forEach(card => {
+    const addToCartBtn = card.querySelector('.add-to-cart');
+
+    addToCartBtn.addEventListener('click', () => {
+      const productName = card.querySelector('.product-name').textContent;
+      const productPrice = card.querySelector('.product-price').textContent;
+      const productImage = card.querySelector('img').src;
+
+      const product = { name: productName, price: productPrice, image: productImage };
+
+      cart.push(product);
+      saveCart();
+
+      popup.style.display = "block";
+      setTimeout(() => popup.style.display = "none", 2000);
+    });
+  });
+
+  // Cart icon click: toggle cart modal
+  document.querySelector('.fa-cart-shopping').addEventListener('click', () => {
+    cartModal.style.display = (cartModal.style.display === 'none') ? 'block' : 'none';
+    renderCart();
+  });
+
+  // Price slider
+  const priceSlider = document.getElementById("price-range");
+  const priceValue = document.getElementById("price-value");
+  priceSlider.addEventListener("input", () => {
+    priceValue.textContent = ₹${priceSlider.value};
+  });
+
+  // Back to Top button
+  const backToTop = document.getElementById("backToTop");
+  window.onscroll = function () {
+    backToTop.style.display = (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) ? "block" : "none";
+  };
+  backToTop.onclick = function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // On page load
+  updateCartUI();
+
+
+let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+// Save wishlist to localStorage
+function saveWishlist() {
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+}
+
+// Toggle heart icon and wishlist state
+document.querySelectorAll('.product-card').forEach(card => {
+  const wishlistBtn = card.querySelector('.wishlist-btn');
+  const productName = card.querySelector('.product-name').textContent;
+  const productImage = card.querySelector('img').src;
+  const productPrice = card.querySelector('.product-price').textContent;
+
+  const isLiked = wishlist.some(item => item.name === productName);
+  if (isLiked) {
+    wishlistBtn.querySelector('i').classList.remove('fa-regular');
+    wishlistBtn.querySelector('i').classList.add('fa-solid');
+  }
+
+  wishlistBtn.addEventListener('click', () => {
+    const index = wishlist.findIndex(item => item.name === productName);
+
+    if (index >= 0) {
+      // Remove from wishlist
+      wishlist.splice(index, 1);
+      wishlistBtn.querySelector('i').classList.remove('fa-solid');
+      wishlistBtn.querySelector('i').classList.add('fa-regular');
+    } else {
+      // Add to wishlist
+      wishlist.push({ name: productName, image: productImage, price: productPrice });
+      wishlistBtn.querySelector('i').classList.remove('fa-regular');
+      wishlistBtn.querySelector('i').classList.add('fa-solid');
+    }
+
+    saveWishlist();
+  });
+});
+
+
+
+</script>
+
+
+
+</body>
+</html>
